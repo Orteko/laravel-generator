@@ -453,9 +453,10 @@ class TableFieldsGenerator
                 break;
             }
 
-            // if foreign field is primary key of this table
-            // then it can not be many to many
-            if ($foreignField == $primary) {
+            // if the foreign field is the primary key of this table then it
+            // can not be many to many except when we are expecting primary
+            // keys on the pivot table
+            if (!config('infyom.laravel_generator.allow_primary_key_on_pivot_table', false) && $foreignField == $primary) {
                 return false;
             }
         }
